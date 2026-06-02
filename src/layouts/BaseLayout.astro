@@ -1,0 +1,107 @@
+---
+import "@fontsource-variable/geist";
+import "@fontsource-variable/anek-kannada";
+import "../styles/global.css";
+import SiteNav from "../components/SiteNav.astro";
+import { site } from "../lib/site";
+
+type Props = {
+  title?: string;
+  description?: string;
+  image?: string;
+  canonical?: string;
+  type?: "website" | "article";
+  publishedTime?: string;
+  modifiedTime?: string;
+  jsonLd?: Record<string, unknown>;
+};
+
+const {
+  title = site.title,
+  description = site.description,
+  image = site.defaultImage,
+  canonical = Astro.url.href,
+  type = "website",
+  publishedTime,
+  modifiedTime,
+  jsonLd,
+} = Astro.props;
+
+const absoluteImage = image.startsWith("http")
+  ? image
+  : new URL(image, Astro.site || Astro.url).href;
+---
+
+<!doctype html>
+<html lang="kn-IN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content={site.author} />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:type" content={type} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={absoluteImage} />
+    <meta property="og:locale" content="kn_IN" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={absoluteImage} />
+    {publishedTime && <meta property="article:published_time" content={publishedTime} />}
+    {modifiedTime && <meta property="article:modified_time" content={modifiedTime} />}
+    <link rel="alternate" type="application/rss+xml" title="savyasachi RSS" href="/rss.xml" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+  </head>
+  <body>
+    <SiteNav />
+    <main>
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <div>
+        <a class="footer-brand" href="/">savyasachi</a>
+        <p>A home for Deviprasad Shetty's Kannada writings.</p>
+      </div>
+      <nav aria-label="Footer">
+        <a href="/articles/">Writings</a>
+        <a href="/about/">About</a>
+        <a href="/rss.xml">RSS</a>
+      </nav>
+    </footer>
+    <script>
+      (function () {
+        const toggle = document.getElementById("nav-toggle");
+        const nav = document.getElementById("primary-nav");
+        if (!toggle || !nav) return;
+        let open = false;
+        function setState(state) {
+          open = state;
+          toggle.setAttribute("aria-expanded", String(state));
+          nav.classList.toggle("nav-open", state);
+          document.body.classList.toggle("nav-active", state);
+          if (state) {
+            toggle.focus();
+          }
+        }
+        toggle.addEventListener("click", () => setState(!open));
+        nav.querySelectorAll("a").forEach((link) => {
+          link.addEventListener("click", () => setState(false));
+        });
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape" && open) setState(false);
+        });
+        document.addEventListener("click", (e) => {
+          if (open && !nav.contains(e.target) && !toggle.contains(e.target)) {
+            setState(false);
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,98 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PostCard from "../components/PostCard.astro";
+import { getPosts } from "../lib/wordpress";
+import { site } from "../lib/site";
+
+const posts = await getPosts();
+const [featured, ...rest] = posts;
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  name: site.name,
+  description: site.description,
+  inLanguage: "kn-IN",
+  author: {
+    "@type": "Person",
+    name: site.author,
+  },
+};
+---
+
+<BaseLayout title={site.title} description={site.description} image={site.defaultImage} jsonLd={jsonLd}>
+  <section class="hero-section">
+    <div class="hero-copy">
+      <p class="eyebrow">Personal essays in Kannada</p>
+      <h1>savyasachi</h1>
+      <p class="hero-kannada">A place for what I see, what stays, and what refuses to leave quietly.</p>
+      <p class="hero-lead">
+        I write in Kannada about life, people, books, memory and the small questions
+        that keep returning. Some pieces are notes. Some become essays.
+      </p>
+      <div class="hero-actions">
+        <a class="button primary" href="/articles/">Read writings <span>→</span></a>
+        <a class="button secondary" href="/about/">About the author</a>
+      </div>
+    </div>
+    <aside class="author-panel" aria-label="Author profile">
+      <div class="author-frame">
+        <img src={site.authorImage} alt="ದೇವಿಪ್ರಸಾದ್ ಶೆಟ್ಟಿ ಹೆಬ್ಬಾಗಿಲುಮನೆ" />
+      </div>
+      <div>
+        <p>Author</p>
+        <strong>{site.authorKn}</strong>
+        <span>Author of the Kannada novel Garike</span>
+      </div>
+    </aside>
+  </section>
+
+  <section class="section-shell section-card intro-card">
+    <div class="section-copy">
+      <p class="eyebrow">The voice</p>
+      <h2>Slow, personal, and rooted in Kannada.</h2>
+      <p>
+        This is not a news feed or a content factory. It is a quieter place for
+        personal experience, literature, society, memory and the thoughts that need
+        a little more room.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-shell latest-section">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">Latest</p>
+        <h2>Recent writings.</h2>
+        <p>New Kannada essays and notes, collected in one readable place.</p>
+      </div>
+      <a class="text-link" href="/articles/">All writings</a>
+    </div>
+    {
+      featured ? (
+        <div class="post-grid latest-post-grid">
+          <PostCard post={featured} featured />
+          {rest.slice(0, 4).map((post) => <PostCard post={post} />)}
+        </div>
+      ) : (
+        <div class="empty-state">
+          <p class="eyebrow">No posts yet</p>
+          <h2>The first essay has a place ready.</h2>
+          <p>New Kannada writings will appear here after publishing.</p>
+        </div>
+      )
+    }
+  </section>
+
+  <section class="garike-band">
+    <div>
+      <p class="eyebrow">ಪುಸ್ತಕ</p>
+      <h2>ಗರಿಕೆ: ಮತ್ತೆ ಚಿಗುರುವಾಕೆ</h2>
+      <p>
+        ಮಲೆನಾಡಿನ ಮಂಜಿನಿಂದ ಕರಾವಳಿಯ ಕಠಿಣ ಬದುಕಿನವರೆಗೆ ಸಾಗುವ ಗೌರಿಯ ಪಯಣ.
+        ವಂಚನೆ, ತಾಯ್ತನ ಮತ್ತು ಸ್ವಾಭಿಮಾನಗಳ ನಡುವೆ ಮತ್ತೆ ಚಿಗುರುವ ಹೆಣ್ಣಿನ ಕಥೆ.
+      </p>
+      <a class="button primary light" href="/garike/">ಪುಸ್ತಕದ ಬಗ್ಗೆ <span>→</span></a>
+    </div>
+    <img src="/assets/garike-cover.webp" alt="ಗರಿಕೆ ಪುಸ್ತಕದ ಮುಖಪುಟ" />
+  </section>
+</BaseLayout>

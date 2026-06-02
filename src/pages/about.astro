@@ -1,0 +1,40 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { site } from "../lib/site";
+
+const title = `ನನ್ನ ಬಗ್ಗೆ | ${site.name}`;
+const description = "ದೇವಿಪ್ರಸಾದ್ ಶೆಟ್ಟಿ ಹೆಬ್ಬಾಗಿಲುಮನೆ, ಗರಿಕೆ ಕಾದಂಬರಿಯ ಲೇಖಕರು ಮತ್ತು savyasachi ಕನ್ನಡ ಬ್ಲಾಗ್‌ನ ಬರಹಗಾರರು.";
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: site.author,
+  alternateName: site.authorKn,
+  url: "https://savyasachi.vercel.app/about/",
+  image: site.authorImage,
+  knowsLanguage: ["Kannada", "English"],
+};
+---
+
+<BaseLayout title={title} description={description} image={site.authorImage} jsonLd={jsonLd}>
+  <section class="about-page">
+    <div class="about-photo">
+      <img src={site.authorImage} alt={site.authorKn} />
+    </div>
+    <div class="about-copy">
+      <p class="eyebrow">ಲೇಖಕರು</p>
+      <h1>{site.authorKn}</h1>
+      <p>
+        ದೇವಿಪ್ರಸಾದ್ ಶೆಟ್ಟಿ ಅವರ ಬರಹಗಳಲ್ಲಿ ಬದುಕಿನ ಚಿಕ್ಕ ಚಿಕ್ಕ ಚಲನೆಗಳು, ಸಮಾಜದ
+        ಕಹಿ ಮುಖಗಳು, ಮನುಷ್ಯರ ಮೌನ ಘನತೆ ಮತ್ತು ಮತ್ತೆ ಎದ್ದು ನಿಲ್ಲುವ ನಂಬಿಕೆ ಕಾಣಿಸುತ್ತವೆ.
+      </p>
+      <p>
+        ಅವರ ಗರಿಕೆ ಕಾದಂಬರಿ ಮಾನವೀಯತೆ, ಕುಟುಂಬ, ತಾಯ್ತನ ಮತ್ತು ಸ್ವಾಭಿಮಾನವನ್ನು ಕೇಂದ್ರದಲ್ಲಿಟ್ಟುಕೊಂಡಿದೆ.
+        ಈ ಬ್ಲಾಗ್ ಆ ಬರಹದ ಪಯಣದ ಮುಂದುವರಿಕೆ.
+      </p>
+      <div class="about-links">
+        <a class="button primary" href="/articles/">ಬರಹಗಳನ್ನು ಓದಿ <span>→</span></a>
+        <a class="button secondary" href={site.garikeUrl}>ಗರಿಕೆ ಪುಟ</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

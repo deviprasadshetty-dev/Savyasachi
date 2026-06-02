@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="gold" x1="12" y1="8" x2="52" y2="58">
+      <stop offset="0%" stop-color="#fff0b5"/>
+      <stop offset="50%" stop-color="#e7b84f"/>
+      <stop offset="100%" stop-color="#9f7226"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="#070b06"/>
+  <text x="29" y="43" text-anchor="middle" font-family="serif" font-size="36" font-weight="800" fill="url(#gold)">ಸ</text>
+  <path d="M39 40 L57 32 L50 52 Z" fill="url(#gold)"/>
+  <circle cx="49" cy="42" r="2" fill="#070b06"/>
+</svg>

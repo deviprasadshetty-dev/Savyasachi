@@ -1,0 +1,53 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { site } from "../lib/site";
+
+const title = `ಗರಿಕೆ | ${site.name}`;
+const description = "ಗರಿಕೆ, ದೇವಿಪ್ರಸಾದ್ ಶೆಟ್ಟಿ ಹೆಬ್ಬಾಗಿಲುಮನೆ ಅವರ ಹೊಸ ಕನ್ನಡ ಕಾದಂಬರಿ. ಮಲೆನಾಡು, ಕರಾವಳಿ ಬದುಕು, ತಾಯ್ತನ ಮತ್ತು ಸ್ವಾಭಿಮಾನದ ಭಾವನಾತ್ಮಕ ಕಥೆ.";
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Book",
+  name: "ಗರಿಕೆ: ಮತ್ತೆ ಚಿಗುರುವಾಕೆ",
+  author: {
+    "@type": "Person",
+    name: site.authorKn,
+  },
+  isbn: "9798904790196",
+  inLanguage: "kn-IN",
+  image: site.garikeCover,
+  genre: ["Kannada fiction", "Family novel", "Emotional fiction"],
+};
+---
+
+<BaseLayout title={title} description={description} image={site.garikeCover} jsonLd={jsonLd}>
+  <section class="book-page">
+    <div class="book-copy">
+      <p class="eyebrow">ಪುಸ್ತಕ</p>
+      <h1>ಗರಿಕೆ</h1>
+      <p class="book-subtitle">ಮತ್ತೆ ಚಿಗುರುವಾಕೆ</p>
+      <p>
+        ಮಲೆನಾಡಿನ ಮಂಜಿನಿಂದ ಕರಾವಳಿಯ ಕಠಿಣ ಬದುಕಿನವರೆಗೆ ಸಾಗುವ ಗೌರಿಯ ಪಯಣ.
+        ವಂಚನೆ, ಸಮಾಜದ ಅಣಕ, ತಾಯ್ತನ ಮತ್ತು ಸ್ವಾಭಿಮಾನಗಳ ನಡುವೆ ಗರಿಕೆಯಂತೆ ಮತ್ತೆ
+        ಹಸಿರಾಗುವ ಹೆಣ್ಣಿನ ಕಥೆ.
+      </p>
+      <div class="hero-actions">
+        <a class="button primary" href={site.garikeUrl}>ಪೂರ್ಣ ಪುಸ್ತಕ ಪುಟ <span>→</span></a>
+        <a class="button secondary" href="https://notionpress.com/in/read/garike">ಖರೀದಿ</a>
+      </div>
+    </div>
+    <img src="/assets/garike-cover.webp" alt="ಗರಿಕೆ ಪುಸ್ತಕದ ಮುಖಪುಟ" />
+  </section>
+
+  <section class="section-shell intro-grid">
+    <div>
+      <p class="eyebrow">ವಿವರಗಳು</p>
+      <h2>ಕನ್ನಡ ಓದುಗರಿಗೆ ಭಾವನಾತ್ಮಕ ಕುಟುಂಬ ಕಾದಂಬರಿ.</h2>
+    </div>
+    <dl class="mini-details">
+      <div><dt>ಲೇಖಕರು</dt><dd>{site.authorKn}</dd></div>
+      <div><dt>ISBN</dt><dd>9798904790196</dd></div>
+      <div><dt>ಪುಟಗಳು</dt><dd>132</dd></div>
+      <div><dt>ವರ್ಗ</dt><dd>Kannada fiction</dd></div>
+    </dl>
+  </section>
+</BaseLayout>

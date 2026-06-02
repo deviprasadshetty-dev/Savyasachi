@@ -1,0 +1,34 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PostCard from "../../components/PostCard.astro";
+import { site } from "../../lib/site";
+import { getPosts } from "../../lib/wordpress";
+
+const posts = await getPosts();
+const title = `Writings | ${site.name}`;
+const description = "All Kannada essays, notes and reflections from savyasachi.";
+---
+
+<BaseLayout title={title} description={description}>
+  <section class="page-hero compact">
+    <p class="eyebrow">All writings</p>
+    <h1>Kannada essays, notes and reflections.</h1>
+    <p>The articles are written in Kannada. This page simply keeps them easy to find.</p>
+  </section>
+
+  <section class="section-shell">
+    {
+      posts.length ? (
+        <div class="post-grid archive">
+          {posts.map((post) => <PostCard post={post} />)}
+        </div>
+      ) : (
+        <div class="empty-state">
+          <p class="eyebrow">No posts yet</p>
+          <h2>The first essay has a place ready.</h2>
+          <p>New Kannada writings will appear here after publishing.</p>
+        </div>
+      )
+    }
+  </section>
+</BaseLayout>

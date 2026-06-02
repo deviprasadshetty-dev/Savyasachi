@@ -1,0 +1,37 @@
+---
+import type { BlogPost } from "../lib/wordpress";
+import { formatDate } from "../lib/wordpress";
+
+type Props = {
+  post: BlogPost;
+  featured?: boolean;
+};
+
+const { post, featured = false } = Astro.props;
+---
+
+<article class:list={["post-card", { featured }]}>
+  <a href={`/articles/${post.slug}/`} aria-label={`${post.title} ಓದಿ`}>
+    {
+      post.image ? (
+        <div class="post-card-image">
+          <img src={post.image} alt="" loading={featured ? "eager" : "lazy"} />
+        </div>
+      ) : (
+        <div class="post-card-image post-card-mark" aria-hidden="true">
+          <img src="/assets/savyasachi-logo.svg" alt="" loading="lazy" />
+          <span>savyasachi</span>
+        </div>
+      )
+    }
+    <div class="post-card-body">
+      <p class="post-meta">
+        <span>{formatDate(post.date)}</span>
+        <span>{post.readingMinutes} min read</span>
+      </p>
+      <h2>{post.title}</h2>
+      <p>{post.description}</p>
+      <span class="text-link">Read more</span>
+    </div>
+  </a>
+</article>

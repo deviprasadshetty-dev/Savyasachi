@@ -1,0 +1,62 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getPosts, formatDate } from "../../lib/wordpress";
+import { site } from "../../lib/site";
+
+export async function getStaticPaths() {
+  const posts = await getPosts();
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const canonical = new URL(`/articles/${post.slug}/`, Astro.site || Astro.url).href;
+const title = `${post.title} | ${site.name}`;
+const postImage = post.image || site.defaultImage;
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  headline: post.title,
+  description: post.description,
+  image: postImage.startsWith("http") ? postImage : new URL(postImage, Astro.site || Astro.url).href,
+  datePublished: post.date,
+  dateModified: post.modified,
+  inLanguage: "kn-IN",
+  author: {
+    "@type": "Person",
+    name: site.author,
+  },
+  publisher: {
+    "@type": "Organization",
+    name: site.name,
+  },
+  mainEntityOfPage: canonical,
+};
+---
+
+<BaseLayout
+  title={title}
+  description={post.description}
+  image={postImage}
+  canonical={canonical}
+  type="article"
+  publishedTime={post.date}
+  modifiedTime={post.modified}
+  jsonLd={jsonLd}
+>
+  <article class="article-page">
+    <header class="article-header">
+      <a class="text-link" href="/articles/">Back to all writings</a>
+      <p class="post-meta">
+        <span>{formatDate(post.date)}</span>
+        <span>{post.readingMinutes} min read</span>
+      </p>
+      <h1>{post.title}</h1>
+      {post.description && <p>{post.description}</p>}
+      {post.image && <img src={post.image} alt="" />}
+    </header>
+    <div class="article-content" set:html={post.content} />
+  </article>
+</BaseLayout>

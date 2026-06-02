@@ -1,0 +1,30 @@
+---
+import { navItems, site } from "../lib/site";
+---
+
+<header class="site-header">
+  <a class="brand-mark" href="/" aria-label="savyasachi ಮುಖಪುಟ">
+    <span class="brand-icon">
+      <img src="/assets/savyasachi-logo.svg" alt="" />
+    </span>
+    <strong>{site.name}</strong>
+  </a>
+  <button
+    class="nav-toggle"
+    id="nav-toggle"
+    aria-label="Toggle navigation menu"
+    aria-expanded="false"
+    aria-controls="primary-nav"
+  >
+    <span class="nav-toggle-bar"></span>
+    <span class="nav-toggle-bar"></span>
+    <span class="nav-toggle-bar"></span>
+  </button>
+  <nav id="primary-nav" aria-label="Primary navigation">
+    {
+      navItems.map((item) => (
+        <a href={item.href}>{item.label}</a>
+      ))
+    }
+  </nav>
+</header>
