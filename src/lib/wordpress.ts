@@ -73,6 +73,14 @@ function estimateReadingMinutes(text: string) {
   return Math.max(1, Math.ceil(words / 180));
 }
 
+function normalizeSlug(slug: string) {
+  try {
+    return decodeURIComponent(slug);
+  } catch {
+    return slug;
+  }
+}
+
 function normalizePost(post: WpComPost): BlogPost {
   const plainText = stripHtml(post.content);
   const description = truncateText(stripHtml(post.excerpt || post.content), 150);
@@ -80,7 +88,7 @@ function normalizePost(post: WpComPost): BlogPost {
   return {
     id: post.ID,
     title: stripHtml(post.title),
-    slug: post.slug,
+    slug: normalizeSlug(post.slug),
     url: post.URL,
     content: post.content,
     excerpt: post.excerpt,
