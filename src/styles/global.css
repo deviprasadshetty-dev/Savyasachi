@@ -460,6 +460,7 @@ h3 {
 
 .latest-post-grid .post-card.featured a {
   grid-template-columns: minmax(280px, 0.92fr) minmax(0, 1fr);
+  min-height: 360px;
 }
 
 .post-card-image {
@@ -474,14 +475,16 @@ h3 {
 }
 
 .latest-post-grid .post-card.featured .post-card-image {
-  aspect-ratio: auto;
-  min-height: 360px;
+  aspect-ratio: 4 / 3;
+  height: 100%;
+  min-height: 0;
+  max-height: 440px;
 }
 
 .latest-post-grid .post-card.featured .post-card-body {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: end;
   padding: 34px;
 }
 
