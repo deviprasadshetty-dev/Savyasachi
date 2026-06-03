@@ -8,8 +8,9 @@ export const site = {
   wordpressSite: "thesavysachi.wordpress.com",
   wordpressUrl: "https://thesavysachi.wordpress.com",
   garikeUrl: "https://deviprasadshetty-dev.github.io/garike/",
+  githubUrl: "https://github.com/deviprasadshetty-dev",
   defaultImage: "/assets/savyasachi-logo.svg",
-  authorImage: "/assets/deviprasad-shetty.webp",
+  authorImage: "/assets/deviprasad-shetty-clear.webp",
   garikeCover: "/assets/garike-cover.webp",
 };
 

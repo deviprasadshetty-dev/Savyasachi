@@ -2,8 +2,9 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { site } from "../lib/site";
 
-const title = `ನನ್ನ ಬಗ್ಗೆ | ${site.name}`;
-const description = "ದೇವಿಪ್ರಸಾದ್ ಶೆಟ್ಟಿ ಹೆಬ್ಬಾಗಿಲುಮನೆ, ಗರಿಕೆ ಕಾದಂಬರಿಯ ಲೇಖಕರು ಮತ್ತು savyasachi ಕನ್ನಡ ಬ್ಲಾಗ್‌ನ ಬರಹಗಾರರು.";
+const title = `About Deviprasad Shetty | ${site.name}`;
+const description =
+  "Deviprasad Shetty is a developer, the author of the Kannada novel Garike, and a hobby writer behind savyasachi.";
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
@@ -11,6 +12,8 @@ const jsonLd = {
   alternateName: site.authorKn,
   url: "https://savyasachi.vercel.app/about/",
   image: site.authorImage,
+  sameAs: [site.githubUrl],
+  jobTitle: "Developer",
   knowsLanguage: ["Kannada", "English"],
 };
 ---
@@ -18,22 +21,26 @@ const jsonLd = {
 <BaseLayout title={title} description={description} image={site.authorImage} jsonLd={jsonLd}>
   <section class="about-page">
     <div class="about-photo">
-      <img src={site.authorImage} alt={site.authorKn} />
+      <img src={site.authorImage} alt={site.author} />
     </div>
     <div class="about-copy">
-      <p class="eyebrow">ಲೇಖಕರು</p>
-      <h1>{site.authorKn}</h1>
+      <p class="eyebrow">Developer and writer</p>
+      <h1>{site.author}</h1>
       <p>
-        ದೇವಿಪ್ರಸಾದ್ ಶೆಟ್ಟಿ ಅವರ ಬರಹಗಳಲ್ಲಿ ಬದುಕಿನ ಚಿಕ್ಕ ಚಿಕ್ಕ ಚಲನೆಗಳು, ಸಮಾಜದ
-        ಕಹಿ ಮುಖಗಳು, ಮನುಷ್ಯರ ಮೌನ ಘನತೆ ಮತ್ತು ಮತ್ತೆ ಎದ್ದು ನಿಲ್ಲುವ ನಂಬಿಕೆ ಕಾಣಿಸುತ್ತವೆ.
+        I am Deviprasad Shetty, a developer who enjoys building on the web and
+        learning through code. You can find my development work and experiments
+        on GitHub.
       </p>
       <p>
-        ಅವರ ಗರಿಕೆ ಕಾದಂಬರಿ ಮಾನವೀಯತೆ, ಕುಟುಂಬ, ತಾಯ್ತನ ಮತ್ತು ಸ್ವಾಭಿಮಾನವನ್ನು ಕೇಂದ್ರದಲ್ಲಿಟ್ಟುಕೊಂಡಿದೆ.
-        ಈ ಬ್ಲಾಗ್ ಆ ಬರಹದ ಪಯಣದ ಮುಂದುವರಿಕೆ.
+        Writing is my hobby and savyasachi is where I keep that part of myself
+        alive. I write in Kannada about life, people, books, memory and the
+        thoughts that stay with me. I am also the author of the Kannada novel
+        Garike.
       </p>
       <div class="about-links">
-        <a class="button primary" href="/articles/">ಬರಹಗಳನ್ನು ಓದಿ <span>→</span></a>
-        <a class="button secondary" href={site.garikeUrl}>ಗರಿಕೆ ಪುಟ</a>
+        <a class="button primary" href="/articles/">Read writings <span>-></span></a>
+        <a class="button secondary" href={site.githubUrl}>GitHub profile</a>
+        <a class="button secondary" href={site.garikeUrl}>Garike page</a>
       </div>
     </div>
   </section>
